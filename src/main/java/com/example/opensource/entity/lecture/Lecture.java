@@ -20,4 +20,7 @@ public class Lecture {
     @OneToMany(mappedBy = "lecture")
     private List<UserConLec> lectureList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "lecture")
+    private List<SecretBoard> secertBoardList = new ArrayList<>();
+
 }

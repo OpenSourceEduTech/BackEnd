@@ -1,13 +1,11 @@
 package com.example.opensource.service;
 
-import com.example.opensource.dto.lecture.LectureInfoDto;
 import com.example.opensource.dto.user.UserInfoDto;
 import com.example.opensource.entity.lecture.Lecture;
 import com.example.opensource.entity.lecture.UserConLec;
-import com.example.opensource.entity.user.Users;
-import com.example.opensource.repository.LectureRepository;
-import com.example.opensource.repository.UserConLecRepository;
-import com.example.opensource.repository.UsersRepository;
+import com.example.opensource.repository.lecture.LectureRepository;
+import com.example.opensource.repository.user.UserConLecRepository;
+import com.example.opensource.repository.user.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

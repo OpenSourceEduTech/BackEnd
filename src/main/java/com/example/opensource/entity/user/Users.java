@@ -21,6 +21,8 @@ public class Users {
     private String profile;
     //학번
     private String deptId;
+
+//    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "users")
