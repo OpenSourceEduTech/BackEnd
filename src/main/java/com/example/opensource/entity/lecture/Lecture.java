@@ -1,5 +1,9 @@
 package com.example.opensource.entity.lecture;
 
+import com.example.opensource.entity.homework.HomeWork;
+import com.example.opensource.entity.homework.HomeWorkComment;
+import com.example.opensource.entity.notice.Notice;
+import com.example.opensource.entity.notice.NoticeComment;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,5 +26,21 @@ public class Lecture {
 
     @OneToMany(mappedBy = "lecture")
     private List<SecretBoard> secertBoardList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lecture")
+    private List<Notice> noticeList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lecture")
+    private List<NoticeComment> noticeCommentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lecture")
+    private List<HomeWork> homeWorkList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lecture")
+    private List<HomeWorkComment> homeWorkCommentList = new ArrayList<>();
+
+
+
+
 
 }

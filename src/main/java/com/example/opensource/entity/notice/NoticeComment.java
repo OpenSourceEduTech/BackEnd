@@ -1,5 +1,6 @@
-package com.example.opensource.entity.lecture;
+package com.example.opensource.entity.notice;
 
+import com.example.opensource.entity.lecture.Lecture;
 import lombok.Data;
 
 import javax.persistence.*;
