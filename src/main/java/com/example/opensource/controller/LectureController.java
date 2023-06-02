@@ -2,6 +2,8 @@ package com.example.opensource.controller;
 
 
 import com.example.opensource.dto.homework.HomeWorkDto;
+import com.example.opensource.dto.homework.MindMapDto;
+import com.example.opensource.dto.lecture.LectureInfoDto;
 import com.example.opensource.dto.lecture.SecretBoardListDto;
 import com.example.opensource.dto.notice.NoticeDto;
 import com.example.opensource.dto.user.UserInfoDto;
@@ -21,6 +23,14 @@ public class LectureController {
     private final UserService userService;
     private final SecretBoardService secretBoardService;
     private final LectureService lectureService;
+
+    /**
+     * 수업
+     */
+    @GetMapping()
+    public List<LectureInfoDto> getLectures() {
+        return lectureService.getLectures();
+    }
 
     /**
      * 사용자 정보 리스트 가져오기
@@ -70,5 +80,13 @@ public class LectureController {
     public ResponseEntity postHomework(@PathVariable(name = "lectureId") Long lectureId,
                                        @RequestBody NoticeDto noticeDto) {
         return lectureService.postNotice(lectureId, noticeDto);
+    }
+
+    /**
+     * 마인드맵
+     */
+    @GetMapping("{lectureId}/mindmap")
+    public MindMapDto getMindMap(@PathVariable(name = "lectureId") Long lectureId) {
+        return lectureService.getMindMap(lectureId);
     }
 }

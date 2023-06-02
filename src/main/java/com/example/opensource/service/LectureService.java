@@ -1,6 +1,8 @@
 package com.example.opensource.service;
 
 import com.example.opensource.dto.homework.HomeWorkDto;
+import com.example.opensource.dto.homework.MindMapDto;
+import com.example.opensource.dto.lecture.LectureInfoDto;
 import com.example.opensource.dto.notice.NoticeDto;
 import com.example.opensource.entity.homework.HomeWork;
 import com.example.opensource.entity.lecture.Lecture;
@@ -25,6 +27,20 @@ public class LectureService {
     private final LectureRepository lectureRepository;
     private final HomeworkRepository homeworkRepository;
     private final NoticeRepository noticeRepository;
+
+    /**
+     * 수업
+     */
+    public List<LectureInfoDto> getLectures() {
+        List<Lecture> lectures = lectureRepository.findAll();
+        List<LectureInfoDto> lectureInfoDtos = new ArrayList<>();
+        for(Lecture l : lectures) {
+            LectureInfoDto lectureInfoDto = new LectureInfoDto(l);
+            lectureInfoDtos.add(lectureInfoDto);
+        }
+
+        return lectureInfoDtos;
+    }
 
     /**
      * 과제
@@ -82,5 +98,13 @@ public class LectureService {
         return new ResponseEntity("게시물 등록 완료", HttpStatus.OK);
     }
 
+    public MindMapDto getMindMap(Long lectureId) {
+        Lecture lecture = lectureRepository.findById(lectureId)
+                .orElseThrow(() -> new IllegalStateException("없는 강의"));
+
+        MindMapDto mindMapDto = new MindMapDto(lecture);
+
+        return mindMapDto;
+    }
 
 }
