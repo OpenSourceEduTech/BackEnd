@@ -37,5 +37,9 @@ public class Users {
     public Users(UserLoginDto userLoginDto) {
         this.loginId = userLoginDto.getId();
         this.loginPass = userLoginDto.getPass();
+        if(userLoginDto.getRole().equals("student"))
+            this.role = Role.STUDENT;
+        else
+            this.role = Role.PROFESSOR;
     }
 }

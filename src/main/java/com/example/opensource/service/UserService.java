@@ -52,13 +52,16 @@ public class UserService {
         return new ResponseEntity("유저 등록 완료", HttpStatus.OK);
     }
 
-    public ResponseEntity postLogin(UserLoginDto userLoginDto) {
+    public UserLoginDto postLogin(UserLoginDto userLoginDto) {
         Users users = usersRepository.findByLoginId(userLoginDto.getId());
-        if(users.getLoginPass().equals(userLoginDto.getPass()))
-            return new ResponseEntity("로그인 성공", HttpStatus.OK);
+        UserLoginDto user;
+        if(users.getLoginPass().equals(userLoginDto.getPass())){
+            user = new UserLoginDto(users);
+        } else {
+            user = new UserLoginDto();
+        }
 
-        return new ResponseEntity("로그인 실패", HttpStatus.FORBIDDEN);
-
+        return user;
     }
 
 }
