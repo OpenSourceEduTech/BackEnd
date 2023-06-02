@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class HomeWork {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String title;
     private String content;

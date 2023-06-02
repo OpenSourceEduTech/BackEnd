@@ -1,5 +1,6 @@
 package com.example.opensource.repository.lecture;
 
+import com.example.opensource.entity.homework.HomeWork;
 import com.example.opensource.entity.lecture.Lecture;
 import com.example.opensource.entity.lecture.SecretBoard;
 import org.springframework.data.jpa.repository.JpaRepository;

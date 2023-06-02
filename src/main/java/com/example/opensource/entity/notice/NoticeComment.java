@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class NoticeComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String content;
 
