@@ -9,6 +9,7 @@ import com.example.opensource.service.LectureService;
 import com.example.opensource.service.SecretBoardService;
 import com.example.opensource.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +45,15 @@ public class LectureController {
         return lectureService.getHomeworks(lectureId);
     }
 
+    /**
+     * 과제 등록
+     */
+    @PostMapping("{lectureId}/homework")
+    public ResponseEntity postHomework(@PathVariable(name = "lectureId") Long lectureId,
+                                       @RequestBody HomeWorkDto homeWorkDto) {
+        return lectureService.postHomework(lectureId, homeWorkDto);
+    }
+
 
     /**
      * 공지 조회
@@ -53,4 +63,12 @@ public class LectureController {
         return lectureService.getNotices(lectureId);
     }
 
+    /**
+     * 공지 등록
+     */
+    @PostMapping("{lectureId}/notice")
+    public ResponseEntity postHomework(@PathVariable(name = "lectureId") Long lectureId,
+                                       @RequestBody NoticeDto noticeDto) {
+        return lectureService.postNotice(lectureId, noticeDto);
+    }
 }
