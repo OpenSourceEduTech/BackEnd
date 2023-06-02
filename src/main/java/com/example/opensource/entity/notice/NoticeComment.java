@@ -14,8 +14,6 @@ public class NoticeComment {
 
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Lecture lecture;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Notice notice;

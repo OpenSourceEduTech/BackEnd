@@ -31,13 +31,8 @@ public class Lecture {
     private List<Notice> noticeList = new ArrayList<>();
 
     @OneToMany(mappedBy = "lecture")
-    private List<NoticeComment> noticeCommentList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "lecture")
     private List<HomeWork> homeWorkList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "lecture")
-    private List<HomeWorkComment> homeWorkCommentList = new ArrayList<>();
 
 
 

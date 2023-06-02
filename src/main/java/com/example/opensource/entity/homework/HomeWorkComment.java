@@ -14,8 +14,6 @@ public class HomeWorkComment {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private HomeWork homeWork;
+    private HomeWork homework;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Lecture lecture;
 }

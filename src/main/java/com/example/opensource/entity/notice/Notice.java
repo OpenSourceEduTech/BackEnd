@@ -15,6 +15,7 @@ public class Notice {
 
     private String title;
     private String content;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Lecture lecture;
 
