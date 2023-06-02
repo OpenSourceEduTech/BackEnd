@@ -1,12 +1,17 @@
 package com.example.opensource.service;
 
 import com.example.opensource.dto.user.UserInfoDto;
+import com.example.opensource.dto.user.UserLoginDto;
 import com.example.opensource.entity.lecture.Lecture;
 import com.example.opensource.entity.lecture.UserConLec;
+import com.example.opensource.entity.user.Users;
 import com.example.opensource.repository.lecture.LectureRepository;
 import com.example.opensource.repository.user.UserConLecRepository;
 import com.example.opensource.repository.user.UsersRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -37,6 +42,23 @@ public class UserService {
         }
 
         return userInfoDtoList;
+    }
+
+    public ResponseEntity postUser(UserLoginDto userLoginDto){
+        Users users = new Users(userLoginDto);
+
+        usersRepository.save(users);
+
+        return new ResponseEntity("유저 등록 완료", HttpStatus.OK);
+    }
+
+    public ResponseEntity postLogin(UserLoginDto userLoginDto) {
+        Users users = usersRepository.findByLoginId(userLoginDto.getId());
+        if(users.getLoginPass().equals(userLoginDto.getPass()))
+            return new ResponseEntity("로그인 성공", HttpStatus.OK);
+
+        return new ResponseEntity("로그인 실패", HttpStatus.FORBIDDEN);
+
     }
 
 }
