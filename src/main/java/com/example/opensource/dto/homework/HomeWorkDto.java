@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class HomeWorkDto {
+    private Long id;
     private String title;
     private String content;
 
 
     public HomeWorkDto(HomeWork homeWork) {
+        this.id = homeWork.getId();
         this.title = homeWork.getTitle();
         this.content = homeWork.getContent();
     }
