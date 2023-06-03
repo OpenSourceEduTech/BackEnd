@@ -47,7 +47,12 @@ public class UserService {
 
     public ResponseEntity postUser(UserLoginDto userLoginDto){
         Users users = new Users(userLoginDto);
+        Lecture lecture = lectureRepository.findById(1l)
+                .orElseThrow(() -> new IllegalStateException("강의 없음"));
 
+        UserConLec userConLec = new UserConLec(users, lecture);
+
+        userConLecRepository.save(userConLec);
         usersRepository.save(users);
 
         return new ResponseEntity("유저 등록 완료", HttpStatus.OK);
