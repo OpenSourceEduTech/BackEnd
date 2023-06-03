@@ -41,5 +41,7 @@ public class Users {
             this.role = Role.STUDENT;
         else
             this.role = Role.PROFESSOR;
+        this.profile = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MDdfNyAg%2FMDAxNjU0NTY1NjQ5NzU5.9z_u_FB-IPFLFKsHxnCFtcbZ8Cwa5D9b42ddQO5RNJ8g.SzUdU3OjRqZRhUAOk1cnO6XTJgvAiXgHNux86FHUlTog.PNG.jasonhcho%2F1.png&type=a340";
+        this.name = userLoginDto.getId();
     }
 }
