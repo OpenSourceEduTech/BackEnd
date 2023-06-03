@@ -13,6 +13,7 @@ import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class UserService {
         if(users.getLoginPass().equals(userLoginDto.getPass())){
             user = new UserLoginDto(users);
         } else {
-            user = new UserLoginDto();
+             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "비밀번호가 일치하지 않습니다.");
         }
 
         return user;
