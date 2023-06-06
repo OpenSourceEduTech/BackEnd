@@ -21,6 +21,7 @@ public class HomeWork {
     private String startDate;
     private String EndDate;
     private int score;
+    private String filePath;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Lecture lecture;
@@ -33,6 +34,10 @@ public class HomeWork {
         this.title = homeWorkDto.getTitle();
         this.content = homeWorkDto.getContent();
         this.lecture = lecture;
+    }
+
+    public void addFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
 }

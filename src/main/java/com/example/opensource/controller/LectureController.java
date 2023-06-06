@@ -11,9 +11,13 @@ import com.example.opensource.service.LectureService;
 import com.example.opensource.service.SecretBoardService;
 import com.example.opensource.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -60,10 +64,19 @@ public class LectureController {
      */
     @PostMapping("{lectureId}/homework")
     public ResponseEntity postHomework(@PathVariable(name = "lectureId") Long lectureId,
-                                       @RequestBody HomeWorkDto homeWorkDto) {
-        return lectureService.postHomework(lectureId, homeWorkDto);
+                                       @RequestPart("homeworkDto") HomeWorkDto homeWorkDto,
+                                       @RequestPart("file") MultipartFile file) {
+
+        return lectureService.postHomework(lectureId, homeWorkDto, file);
     }
 
+    /**
+     * 과제 상세
+     */
+    @GetMapping("homework/{homeworkId}")
+    public HomeWorkDto getHomeworkDetail(@PathVariable(name = "homeworkId") Long homeworkId){
+        return lectureService.getHomework(homeworkId);
+    }
 
     /**
      * 공지 조회
@@ -80,6 +93,14 @@ public class LectureController {
     public ResponseEntity postHomework(@PathVariable(name = "lectureId") Long lectureId,
                                        @RequestBody NoticeDto noticeDto) {
         return lectureService.postNotice(lectureId, noticeDto);
+    }
+
+    /**
+     * 과제 상세
+     */
+    @GetMapping("notices/{noticeId}")
+    public NoticeDto getNoticeDetail(@PathVariable(name = "noticeId") Long noticeId){
+        return lectureService.getNotice(noticeId);
     }
 
     /**
