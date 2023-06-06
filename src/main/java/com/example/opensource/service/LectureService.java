@@ -88,7 +88,7 @@ public class LectureService {
 
                 // 파일 경로를 데이터베이스에 저장하거나 응답으로 반환
                 // ...
-                homeWork.addFilePath(filePath);
+                homeWork.addFilePath(filePath, fileName);
 
             } catch (IOException e) {
                 e.printStackTrace();

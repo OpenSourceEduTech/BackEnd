@@ -21,6 +21,7 @@ public class HomeWork {
     private String startDate;
     private String EndDate;
     private int score;
+    private String filename;
     private String filePath;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,7 +37,8 @@ public class HomeWork {
         this.lecture = lecture;
     }
 
-    public void addFilePath(String filePath) {
+    public void addFilePath(String filePath, String filename) {
+        this.filename = filename;
         this.filePath = filePath;
     }
 

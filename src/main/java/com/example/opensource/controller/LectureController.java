@@ -7,17 +7,24 @@ import com.example.opensource.dto.lecture.LectureInfoDto;
 import com.example.opensource.dto.lecture.SecretBoardListDto;
 import com.example.opensource.dto.notice.NoticeDto;
 import com.example.opensource.dto.user.UserInfoDto;
+import com.example.opensource.entity.homework.HomeWork;
+import com.example.opensource.repository.homework.HomeworkRepository;
 import com.example.opensource.service.LectureService;
 import com.example.opensource.service.SecretBoardService;
 import com.example.opensource.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -27,6 +34,7 @@ public class LectureController {
     private final UserService userService;
     private final SecretBoardService secretBoardService;
     private final LectureService lectureService;
+    private final HomeworkRepository homeworkRepository;
 
     /**
      * 수업
@@ -76,6 +84,30 @@ public class LectureController {
     @GetMapping("homework/{homeworkId}")
     public HomeWorkDto getHomeworkDetail(@PathVariable(name = "homeworkId") Long homeworkId){
         return lectureService.getHomework(homeworkId);
+    }
+
+    /**
+     * 과제 첨부파일 다운
+     */
+    @GetMapping("/homework/{homeworkId}/download")
+    public ResponseEntity<Object> downloadFile(@PathVariable(name = "homeworkId") Long id) {
+        HomeWork homeWork = homeworkRepository.findById(id)
+                .orElseThrow(()-> new IllegalStateException("없는 과제"));
+        String path = homeWork.getFilePath();
+
+        try {
+            Path filePath = Paths.get(path);
+            Resource resource = new InputStreamResource(Files.newInputStream(filePath)); // 파일 resource 얻기
+
+            File file = new File(path);
+            System.out.println(file.getName());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename(file.getName()).build());  // 다운로드 되거나 로컬에 저장되는 용도로 쓰이는지를 알려주는 헤더
+
+            return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);
+        }
     }
 
     /**
